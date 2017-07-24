@@ -21,3 +21,5 @@
 #Visual Studio Prjects
 **/.vs/
 **/obj/
+**/bin/
+packages/
