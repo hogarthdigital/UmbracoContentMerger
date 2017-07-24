@@ -17,3 +17,9 @@
 
 # ImageProcessor DiskCache 
 **/App_Data/cache/
+
+#Visual Studio Prjects
+**/.vs/
+**/obj/
+**/bin/
+packages/
