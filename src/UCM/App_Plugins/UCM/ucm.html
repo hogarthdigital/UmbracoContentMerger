@@ -1,0 +1,17 @@
+<div>
+	<h2>UCM - Umbraco Content Merger tool</h2>
+	<input id="btn" type="button" name="btn" value="Click me"/>
+</div>
+
+<script>
+	$('#btn').on('click', function(){
+		$.ajax({
+			url: '',
+			type: 'POST',
+			success: function(data){
+				console.log('chegou', data);
+			},
+			dataType: 'json'
+		});
+	});
+</script>
