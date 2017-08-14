@@ -5,13 +5,17 @@
 
 <script>
 	$('#btn').on('click', function(){
-		$.ajax({
-			url: '',
-			type: 'POST',
-			success: function(data){
-				console.log('chegou', data);
-			},
+		$.post({
+			url:'/Umbraco/backoffice/Api/UCM/index',
 			dataType: 'json'
+			})
+		.done(function(data) {
+			console.log(data);
+			console.log('data foi antes');
+		})
+		.fail(function(e){
+			alert('faio');
+			console.log(e);
 		});
 	});
 </script>
