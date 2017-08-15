@@ -1,6 +1,12 @@
 <div>
 	<h2>UCM - Umbraco Content Merger tool</h2>
-	<input id="btn" type="button" name="btn" value="Click me"/>
+
+	<form name="treeSelector">
+		<p>Please select the items you would like to export:</p>
+		<div>
+			<label><input type="checkbox" name="item0" value=""> Item 0</label>
+		</div>
+	</form>
 </div>
 
 <script>
@@ -17,10 +23,7 @@
 		.done(callback);
 	}
 
-
-	$('#btn').on('click', function(){
-		makeRequest('index', null, function(data){
-			console.log('request here', data);
-		});
-	});
+	(function(){
+		
+	})();
 </script>

@@ -9,10 +9,9 @@ namespace UCM.Controllers
 {
     public class UCMController : UmbracoAuthorizedApiController
     {
-        [HttpPost]
         public object Index()
         {
-            return new { mensagem = "qualquer merda" };
+            return new { };
         }
     }
 }
