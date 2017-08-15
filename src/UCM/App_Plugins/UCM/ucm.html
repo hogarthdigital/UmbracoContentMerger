@@ -4,18 +4,23 @@
 </div>
 
 <script>
-	$('#btn').on('click', function(){
+	function makeRequest(action, data, callback){
+		var url = '/Umbraco/backoffice/Api/UCM/' + action;
 		$.post({
-			url:'/Umbraco/backoffice/Api/UCM/index',
-			dataType: 'json'
-			})
-		.done(function(data) {
-			console.log(data);
-			console.log('data foi antes');
+			url: url,
+			dataType: 'json',
+			data: data
 		})
-		.fail(function(e){
-			alert('faio');
-			console.log(e);
+		.fail(function(){
+			alert('request failed for url: ' + url);
+		})
+		.done(callback);
+	}
+
+
+	$('#btn').on('click', function(){
+		makeRequest('index', null, function(data){
+			console.log('request here', data);
 		});
 	});
 </script>
