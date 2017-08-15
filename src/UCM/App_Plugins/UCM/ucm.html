@@ -24,6 +24,9 @@
 	}
 
 	(function(){
-		
+	    //get all the content tree
+	    makeRequest('GetContentTree', null, function (data) {
+            console.log(data);
+	    });
 	})();
 </script>
