@@ -32,13 +32,18 @@ namespace UCM.Controllers
             public int Id;
             public Guid Guid;
             public ContentType Type;
-            public ContentModel[] children;
+            public ContentModel[] Children;
             public ContentModel(IContent content)
             {
                 Name = content.Name;
                 Id = content.Id;
                 Guid = content.Key;
                 Type = new ContentType(content.ContentType);
+
+                //EU SEI QUE ESSA RECURSÃO AKI VAI ESTOURAR A MEMORIA!
+                //MAS EH LINQ, E FICOU LINDO, E FODA-C
+                Children = (from c in content.Children()
+                            select (new ContentModel(c))).ToArray();
             }
         }
 
@@ -54,8 +59,9 @@ namespace UCM.Controllers
         [System.Web.Http.HttpPost]
         public object GetContentTree()
         {
-            
-            return _cs.GetRootContent();
+            var rootElements = _cs.GetRootContent();
+            return (from e in _cs.GetRootContent()
+                    select (new ContentModel(e))).ToArray();
         }
     }
 }
