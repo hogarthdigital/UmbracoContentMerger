@@ -3,8 +3,7 @@
 
 	<form name="treeSelector">
 		<p>Please select the items you would like to export:</p>
-		<div>
-			<label><input type="checkbox" name="item0" value=""> Item 0</label>
+		<div id="tree-view">
 		</div>
 	</form>
 </div>
@@ -26,7 +25,24 @@
 	(function(){
 	    //get all the content tree
 	    makeRequest('GetContentTree', null, function (data) {
-            console.log(data);
+            function drawItem(item, level){
+				var levelString = '';
+				for(var i = 0; i < level; i++){
+					levelString += ' - ';
+				}
+
+				$('#tree-view').append(levelString+'<label><input type="checkbox" name="'+item.Name+'" value="" item-id="'+item.Id+'"> '+item.Name+'</label><br/>');
+
+				for(var i = 0; i < item.Children.length; i++){
+					drawItem(item.Children[i], level + 1);
+				}
+			}
+			
+			for(var i = 0; i < data.length; i++){
+				drawItem(data[i], 0);
+			}
+
+			console.log(data);
 	    });
 	})();
 </script>
