@@ -21,7 +21,7 @@ namespace UCM.Controllers
             {
                 Name = type.Name;
                 Fields = (from t in type.PropertyTypes
-                          select t.Name).ToArray();
+                          select t.Alias).ToArray();
             }
         }
 
@@ -39,7 +39,7 @@ namespace UCM.Controllers
                 Id = content.Id;
                 Guid = content.Key;
                 Type = new ContentType(content.ContentType);
-
+                
                 //EU SEI QUE ESSA RECURSÃO AKI VAI ESTOURAR A MEMORIA!
                 //MAS EH LINQ, E FICOU LINDO, E FODA-C
                 Children = (from c in content.Children()
