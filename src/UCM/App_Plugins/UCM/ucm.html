@@ -1,3 +1,32 @@
+﻿<style>
+    .content-tree-item {
+        width: calc(100% - 25px);
+        padding-left: 25px;
+        position: relative;
+        cursor: pointer;
+        border-top: dashed 1px #eee;
+        padding-top:5px;
+        height: 25px;
+        overflow: hidden;
+    }
+
+    .content-tree-arrow {
+        position: absolute;
+        left: 0;
+        top: 7px;
+        width: 15px;
+        height: 15px;
+    }
+
+    .active.content-tree-item{
+        height:auto;
+    }
+
+    .active > .content-tree-arrow {
+        transform: rotate(90deg);
+    }
+</style>
+
 <div>
 	<h2>UCM - Umbraco Content Merger tool</h2>
 
@@ -22,27 +51,38 @@
 		.done(callback);
 	}
 
-	(function(){
+    (function () {
 	    //get all the content tree
 	    makeRequest('GetContentTree', null, function (data) {
-            function drawItem(item, level){
+	        function drawItem(item, level, parent) {
+	            var element = $(document.createElement('div'));
+	            element.attr('class', 'content-tree-item');
+
+	            parent.append(element);
+
 				var levelString = '';
-				for(var i = 0; i < level; i++){
+	            /*for(var i = 0; i < level; i++){
 					levelString += ' - ';
+				}*/
+
+				if (item.Children.length > 0) {
+				    element.append('<div class="content-tree-arrow">&gt;<div>');
 				}
 
-				$('#tree-view').append(levelString+'<label><input type="checkbox" name="'+item.Name+'" value="" item-id="'+item.Id+'"> '+item.Name+'</label><br/>');
+				element.append(levelString + '<label><input type="checkbox" name="' + item.Name + '" value="" item-id="' + item.Id + '"> ' + item.Name + '</label><br/>');
 
 				for(var i = 0; i < item.Children.length; i++){
-					drawItem(item.Children[i], level + 1);
+				    drawItem(item.Children[i], level + 1, element);
 				}
 			}
 			
 			for(var i = 0; i < data.length; i++){
-				drawItem(data[i], 0);
+			    drawItem(data[i], 0, $('#tree-view'));
 			}
 
-			console.log(data);
+			$('.content-tree-arrow').on('click', function (e) {
+			    $(this).parent().toggleClass('active');
+			});
 	    });
 	})();
 </script>
