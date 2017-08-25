@@ -63,5 +63,11 @@ namespace UCM.Controllers
             return (from e in _cs.GetRootContent()
                     select (new ContentModel(e))).ToArray();
         }
+
+        [System.Web.Http.HttpPost]
+        public object ExportAll()
+        {
+            return new { StatusCode = "Completed"};
+        }
     }
 }
