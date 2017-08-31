@@ -7,9 +7,12 @@ using umbraco.businesslogic;
 
 namespace UCM.App_Plugins.UCM
 {
-    [Application("ucm.umbraco.content.merger.tool", "UCM - Umbraco Content Merger", "icon-untitled", 12)]
     [Application("ucm.umbraco.content.merger.tool", "UCM", "icon-untitled", 12)]
     public class UCM : IApplication
     {
+        public string Index()
+        {
+            return "teste";
+        }
     }
 }
