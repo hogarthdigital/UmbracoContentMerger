@@ -9,6 +9,22 @@ using Umbraco.Web.WebApi;
 
 namespace UCM.Controllers
 {
+    /*
+     function makeRequest(action, data, callback) {
+        var url = '/Umbraco/backoffice/Api/UCM/' + action;
+        $.post({
+            url: url,
+            dataType: 'json',
+            data: data
+        })
+		.fail(function (e) {
+		    alert('request failed for url: ' + url);
+		    console.log(e);
+		})
+		.done(callback);
+     }
+    */
+
     public class UCMController : UmbracoAuthorizedApiController
     {
         [Serializable]
